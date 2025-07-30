@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I Love You</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Courier New', Courier, monospace;
+      cursor: crosshair;
+      position: relative;
+      background: radial-gradient(circle at center, #aee6f9, #c3f1fd);
+      transition: background 0.1s ease;
+    }
+
+    /* Back Button */
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #ff69b4;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px #ff69b4;
+      z-index: 999;
+      transition: background 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #ff1493;
+      box-shadow: 0 0 15px #ff1493;
+    }
+
+    h1 {
+      font-size: 60px;
+      color: #e91e63;
+      text-shadow: 0 0 5px #fff, 0 0 15px #ff69b4;
+      z-index: 10;
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      top: -20px;
+      opacity: 0.8;
+      animation: fall linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 4px white;
+      animation: sparkle 0.5s ease-out forwards;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    @keyframes sparkle {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2);
+      }
+    }
+
+    .heart-button {
+      width: 80px;
+      height: 80px;
+      background-color: #ff69b4;
+      color: white;
+      font-size: 2rem;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .heart-button:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 25px #ff1493;
+      background-color: #ff1493;
+    }
+
+    .click-text {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #e91e63;
+      font-weight: bold;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <!-- Back Button -->
+  <a href="index.html" class="back-btn">← Back</a>
+
+  <h1>I Love You ❤️</h1>
+
+  <button class="heart-button" onclick="window.location.href='third.html'">❤️</button>
+  <div class="click-text">click me</div>
+
+  <script>
+    // Confetti
+    const colors = ['#f0f', '#0ff', '#f00', '#ff0', '#0f0', '#00f'];
+
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = `${Math.random() * 100}vw`;
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 6000);
+    }
+
+    setInterval(createConfetti, 100);
+
+    // Sparkles follow cursor + dynamic background
+    document.addEventListener('mousemove', (e) => {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = `${e.clientX}px`;
+      sparkle.style.top = `${e.clientY}px`;
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 500);
+
+      const x = e.clientX / window.innerWidth * 100;
+      const y = e.clientY / window.innerHeight * 100;
+      document.body.style.background = `radial-gradient(circle at ${x}% ${y}%, #aee6f9, #c3f1fd)`;
+    });
+  </script>
+</body>
+</html>

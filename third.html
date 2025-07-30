@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Message</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #aee6f9, #c3f1fd);
+      transition: background 0.1s linear;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      cursor: crosshair;
+      padding: 2rem;
+      position: relative;
+    }
+
+    /* Back button */
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #ff69b4;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px #ff69b4;
+      z-index: 999;
+      transition: background 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #ff1493;
+      box-shadow: 0 0 15px #ff1493;
+    }
+
+    p {
+      color: #e91e63;
+      font-size: 1.5rem;
+      max-width: 800px;
+      line-height: 1.6;
+      z-index: 2;
+      animation: shine 2s infinite;
+      text-shadow: 0 0 8px #fff, 0 0 15px #ff69b4;
+    }
+
+    @keyframes shine {
+      0% { text-shadow: 0 0 5px #fff, 0 0 10px #ff69b4; }
+      50% { text-shadow: 0 0 15px #fff, 0 0 30px #ff1493; }
+      100% { text-shadow: 0 0 5px #fff, 0 0 10px #ff69b4; }
+    }
+
+    .image-box {
+      display: inline-block;
+      border: 4px dashed #ff69b4;
+      border-radius: 12px;
+      margin-top: 2rem;
+      box-shadow: 0 0 10px #fff;
+    }
+
+    .image-box img {
+      display: block;
+      width: 330px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      animation: fall linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .sparkle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: white;
+      pointer-events: none;
+      opacity: 1;
+      z-index: 999;
+      box-shadow: 0 0 6px #fff, 0 0 10px #ff69b4;
+      animation: sparkleFade 0.6s ease-out forwards;
+    }
+
+    @keyframes sparkleFade {
+      to {
+        transform: scale(1.8);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Back Button -->
+  <a href="love.html" class="back-btn">← Back</a>
+
+  <p>
+    "Happy Birthday, Love Love! I just want to thank you for existing in this world, because with your presence, the world becomes a better place for the people around you, especially me. I also want you to know that I’ll always be here for you. Please enjoy your day! I love you. Mwah!"
+  </p>
+
+  <div class="image-box">
+    <img src="pic.jpg" alt="Special moment" />
+  </div>
+
+  <script>
+    // Confetti
+    function createConfettiPiece() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.top = Math.random() * -20 + 'vh';
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 75%)`;
+      confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
+      confetti.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 8000);
+    }
+
+    setInterval(() => {
+      for (let i = 0; i < 5; i++) createConfettiPiece();
+    }, 300);
+
+    // Mouse Sparkles & Background Hover Effect
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth * 100;
+      const y = e.clientY / window.innerHeight * 100;
+      document.body.style.background = `radial-gradient(circle at ${x}% ${y}%, #aee6f9, #c3f1fd)`;
+
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = `${e.clientX}px`;
+      sparkle.style.top = `${e.clientY}px`;
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 600);
+    });
+  </script>
+</body>
+</html>
